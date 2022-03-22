@@ -49,7 +49,7 @@ def make_chains(text_string):
     
     # words.append(None)
 
-    for i in range(len(words)- 2):
+    for i in range(len(words)- 2): 
         
         key = (words[i],words[i + 1])
 
@@ -61,31 +61,7 @@ def make_chains(text_string):
 
         chains[key].append(value)
 
-        
-        
-        
-
-        
-        
-        
-        # print(f'Keys: {key}, Values: {value}')
-
-        # if i >= 2:
-        #     values += words[i]
-        # if words[i]
-       
-        # chains[keys] = chains.get(words[i+1])
-        
-        
-        # print words[i], words[i + 1]
-        
-        
-
-    
-    
-    
-
-    return print(chains)
+    return chains
 
 make_chains(open_and_read_file(file_path))
 
