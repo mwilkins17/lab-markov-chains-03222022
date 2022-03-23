@@ -47,43 +47,62 @@ def make_chains(text_string):
     
     words = open_and_read_file(file_path).split()
     
-    # words.append(None)
+    words.append(None)
 
-    for i in range(len(words)- 2): 
+    for i in range(len(words)- 2): #iterates through the length of all the words in the file and
+                                   #stopping at the second-to-last index
         
-        key = (words[i],words[i + 1])
+        key = (words[i],words[i + 1]) #makes the key a tuple equal to the current word, and the next word 
 
+        # value = []
+        # chains[key]=value
         
-        value = words[i + 2]
+        # if key in chains:
+        #     chains[key].append(words[i+2])
+            
+            # chains[key] = 
 
-        if key not in chains:
-            chains[key] = []
+        value = words[i + 2] #makes the value equal to the word after the next (3rd word)
 
-        chains[key].append(value)
+        if key not in chains: #checks if the key (whic is the combination of the current word and the next word) has not been added to the chains dictionary
+            chains[key] = []  #if the key hasn't been added to the chains dictionary, make the value and empty list
+                              #
+
+        chains[key].append(value)  #chucks the value into the list of empty (what was done above) or and existing list of values
+
+
 
     return chains
 
-make_chains(open_and_read_file(file_path))
 
-# def make_text(chains):
-#     """Return text from chains."""
+def make_text(chains):
+    """Return text from chains."""
 
-#     words = []
+    words = []
 
-#     # your code goes here
+    key = choice(list(chains.keys())) #makesa singluar key from keys of chains converted from a tuple into a list, and a random key picked out of the list
+    words = [key[0], key[1]] #takes the two words from the randomized list and sets them to a new veriable, words
+    word = choice(chains[key]) #
 
-#     return ' '.join(words)
+    while word is not None:
+        key = (key[1], word)
+        words.append(word)
+        word = choice(chains[key])
 
+  
+    return ' '.join(words)
 
-# input_path = 'green-eggs.txt'
+# make_text(make_chains(open_and_read_file(file_path)))
 
-# # Open the file and turn it into one long string
-# input_text = open_and_read_file(input_path)
+input_path = 'green-eggs.txt'
 
-# # Get a Markov chain
-# chains = make_chains(input_text)
+# Open the file and turn it into one long string
+input_text = open_and_read_file(input_path)
 
-# # Produce random text
-# random_text = make_text(chains)
+# Get a Markov chain
+chains = make_chains(input_text)
 
-# print(random_text)
+# Produce random text
+random_text = make_text(chains)
+
+print(random_text)
